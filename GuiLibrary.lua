@@ -113,7 +113,7 @@ library["CreateWindow"] = function(uiTitle, accentColor)
 		buttonstate.TextStrokeTransparency = 0.000
 		buttonstate.TextXAlignment = Enum.TextXAlignment.Right
 		
-		buttonstate_padding.Parent = buttontext
+		buttonstate_padding.Parent = buttonstate
 		buttonstate_padding.PaddingRight = UDim.new(0,10)
 		
 		buttonmain.Name = "button-main"
