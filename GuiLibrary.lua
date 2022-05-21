@@ -10,65 +10,6 @@ library["CreateWindow"] = function(uiTitle, accentColor)
 	local dragger = Instance.new("Frame")
 	local accent = Instance.new("Frame")
 
-	local function IGPU_fake_script() -- main.drag 
-		local script = Instance.new('LocalScript', main)
-
-		local UserInputService = game:GetService("UserInputService")
-		local runService = (game:GetService("RunService"));
-
-		local gui = script.Parent
-
-		local dragging
-		local dragInput
-		local dragStart
-		local startPos
-
-		local function Lerp(a, b, m)
-			return a + (b - a) * m
-		end;
-
-		local lastMousePos
-		local lastGoalPos
-		local DRAG_SPEED = (8); -- // The speed of the UI darg.
-		local function Update(dt)
-			if not (startPos) then return end;
-			if not (dragging) and (lastGoalPos) then
-				gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, lastGoalPos.X.Offset, dt * DRAG_SPEED), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, lastGoalPos.Y.Offset, dt * DRAG_SPEED))
-				return 
-			end;
-
-			local delta = (lastMousePos - UserInputService:GetMouseLocation())
-			local xGoal = (startPos.X.Offset - delta.X);
-			local yGoal = (startPos.Y.Offset - delta.Y);
-			lastGoalPos = UDim2.new(startPos.X.Scale, xGoal, startPos.Y.Scale, yGoal)
-			gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, xGoal, dt * DRAG_SPEED), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, yGoal, dt * DRAG_SPEED))
-		end;
-
-		gui.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				dragging = true
-				dragStart = input.Position
-				startPos = gui.Position
-				lastMousePos = UserInputService:GetMouseLocation()
-
-				input.Changed:Connect(function()
-					if input.UserInputState == Enum.UserInputState.End then
-						dragging = false
-					end
-				end)
-			end
-		end)
-
-		gui.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				dragInput = input
-			end
-		end)
-
-		runService.Heartbeat:Connect(Update)
-	end
-	coroutine.wrap(IGPU_fake_script)()
-
 	leefulibrary.Name = "leefu-library"
 	leefulibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	leefulibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -78,6 +19,9 @@ library["CreateWindow"] = function(uiTitle, accentColor)
 	main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 	main.Position = UDim2.new(0.339309424, 0, 0.282208592, 0)
 	main.Size = UDim2.new(0, 180, 0, 250)
+	main.BorderSizePixel = 0
+	main.Active = true
+	main.Draggable = true
 
 	mainlayout.Name = "main-layout"
 	mainlayout.Parent = main
@@ -126,7 +70,7 @@ library["CreateWindow"] = function(uiTitle, accentColor)
 		local buttonstate = Instance.new("TextLabel")
 		local buttontext_padding = Instance.new("UIPadding")
 		local buttonmain = Instance.new("TextButton")
-		
+		local buttonstate_padding = Instance.new("UIPadding")
 		
 		button.Name = "button"
 		button.Parent = main
@@ -162,7 +106,10 @@ library["CreateWindow"] = function(uiTitle, accentColor)
 		buttonstate.TextSize = 14.000
 		buttonstate.TextStrokeTransparency = 0.000
 		buttonstate.TextXAlignment = Enum.TextXAlignment.Right
-
+		
+		buttonstate_padding.Parent = buttontext
+		buttonstate_padding.PaddingRight = UDim.new(0,10)
+		
 		buttonmain.Name = "button-main"
 		buttonmain.Parent = button
 		buttonmain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
