@@ -73,10 +73,8 @@ library["CreateWindow"] = function(uiTitle, accentColor)
 		local callback = callback or function() end
 		local button = Instance.new("Frame")
 		local buttontext = Instance.new("TextLabel")
-		local buttonstate = Instance.new("TextLabel")
 		local buttontext_padding = Instance.new("UIPadding")
 		local buttonmain = Instance.new("TextButton")
-		local buttonstate_padding = Instance.new("UIPadding")
 		
 		button.Name = "button"
 		button.Parent = main
@@ -100,21 +98,6 @@ library["CreateWindow"] = function(uiTitle, accentColor)
 
 		buttontext_padding.Parent = buttontext
 		buttontext_padding.PaddingLeft = UDim.new(0,10)
-			
-		buttonstate.Name = "button-state"
-		buttonstate.Parent = button
-		buttonstate.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		buttonstate.BackgroundTransparency = 1.000
-		buttonstate.Size = UDim2.new(1, 0, 1, 0)
-		buttonstate.Font = Enum.Font.Code
-		buttonstate.Text = "+"
-		buttonstate.TextColor3 = Color3.fromRGB(255, 255, 255)
-		buttonstate.TextSize = 14.000
-		buttonstate.TextStrokeTransparency = 0.000
-		buttonstate.TextXAlignment = Enum.TextXAlignment.Right
-		
-		buttonstate_padding.Parent = buttonstate
-		buttonstate_padding.PaddingRight = UDim.new(0,10)
 		
 		buttonmain.Name = "button-main"
 		buttonmain.Parent = button
