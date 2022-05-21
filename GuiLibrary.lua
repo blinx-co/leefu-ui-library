@@ -13,7 +13,13 @@ library["CreateWindow"] = function(uiTitle, accentColor)
 	leefulibrary.Name = "leefu-library"
 	leefulibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	leefulibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
+	
+	for i,v in pairs(game.CoreGui:GetChildren()) do 
+	    if v:IsA("ScreenGui") and v.Name == leefulibrary.Name then 
+		v:Destroy()
+	    end
+	end
+	
 	main.Name = "main"
 	main.Parent = leefulibrary
 	main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
